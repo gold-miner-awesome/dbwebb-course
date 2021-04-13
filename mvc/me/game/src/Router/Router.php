@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mos\Router;
 
+use Webprogramming\Dice\{
+    Game
+};
+
 use function Mos\Functions\{
     destroySession,
     redirectTo,
@@ -11,11 +15,8 @@ use function Mos\Functions\{
     renderTwigView,
     sendResponse,
     url,
-    initSession,
-    initGameSession
+    initSession
 };
-
-use Webprogramming\Dice\Game;
 
 /**
  * Class Router.
@@ -27,7 +28,7 @@ class Router
         if ($method === "GET" && $path === "/") {
             $data = [
                 "header" => "Home page",
-                "message" => "Welcome to My Game! <br/>" . 
+                "message" => "Welcome to My Game! <br/>" .
                             "Please go to 'Game 21' in order to play this dice game.",
                 "title" => "Welcome to My Game",
                 "menu_home_class" => "selected"
@@ -60,8 +61,12 @@ class Router
             sendResponse($body);
             return;
         } else if ($method === "GET" && $path === "/dice") {
-            initGameSession();
-            
+            $_SESSION['cnt-dices'] = 1;
+            $_SESSION['dice-type'] = 1;
+            $_SESSION['player-points'] = 0;
+            $_SESSION['computer-points'] = 0;
+            $_SESSION['winner'] = '';
+
             $data = [
                 "header" => "Dice Game Setting",
                 "message" => "Hey, edit the game setting youreself!",
@@ -74,17 +79,6 @@ class Router
         } else if ($method === "POST" && $path === "/dice") {
             $_SESSION['cnt-dices'] = intval($_POST['cnt-dices']);
             $_SESSION['dice-type'] = $_POST['dice-type'];
-            $p_bet_amount = round(floatval($_POST['bet-amount']), 2);
-            $c_bet_amount = round($_SESSION['computer-bitcoins'] / 100 * mt_rand(0, 50), 2);
-            $_SESSION['player-bet-amount'] = $p_bet_amount;
-            $_SESSION['computer-bet-amount'] = $c_bet_amount;
-
-            if ($p_bet_amount >= $c_bet_amount) {
-                $_SESSION['bet-amount'] = $c_bet_amount;
-            } else {
-                $_SESSION['bet-amount'] = $p_bet_amount;
-            }
-            
             $data = [
                 "header" => "Welcome to Dice Game",
                 "message" => "please, play this dice game!",
@@ -107,34 +101,8 @@ class Router
             $data = [
                 "header" => "Dice Game was Ended!",
                 "message" => "Hey!",
-                "title" => "Result - Game 21",
-                "menu_game21_class" => "selected"
             ];
             $body = renderView("layout/result.php", $data);
-            sendResponse($body);
-            return;
-        } else if ($method === "GET" && $path === "/dice/history") {
-            if (!isset($_SESSION['player-bitcoins']) || !isset($_SESSION['computer-bitcoins'])) {
-                initGameSession();
-            }
-            
-            $data = [
-                "header" => "Dice Game History",
-                "message" => "Hey!",
-                "title" => "View History",
-                "menu_history_class" => "selected"
-            ];
-            $body = renderView("layout/history.php", $data);
-            sendResponse($body);
-            return;
-        } else if ($method === "GET" && $path === "/dice/rules") {
-            $data = [
-                "header" => "Dice Game Rules",
-                "message" => "Here is game rules.",
-                "title" => "Dice Game Rules",
-                "menu_rules_class" => "selected"
-            ];
-            $body = renderView("layout/rules.php", $data);
             sendResponse($body);
             return;
         }

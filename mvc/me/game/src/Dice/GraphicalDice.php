@@ -15,7 +15,7 @@ class GraphicalDice
 {
     const FACES = 6;
 
-    private ?int $roll = null;
+    private $roll;
 
     public function roll(): int
     {
@@ -26,8 +26,6 @@ class GraphicalDice
 
     public function getLastRoll(): string
     {
-        $index = rand(1, 6);
-        return "<img src='" . url("/images/") . $this->roll . ".png' class='rotate" 
-                . $index . "' width='100' />";
+        return "<img src='" . url("/images") . "/" . $this->roll . ".png' width='100' />";
     }
 }
