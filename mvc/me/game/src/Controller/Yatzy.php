@@ -6,15 +6,11 @@ namespace Mos\Controller;
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ResponseInterface;
-use Webprogramming\Yatzy\{
-    Game
-};
+use Webprogramming\Yatzy\Game;
 
-use function Mos\Functions\{
-    renderView,
-    initSessionYatzySetting,
-    getRoundTitle
-};
+use function Mos\Functions\renderView;
+use function Mos\Functions\initSessionYatzySetting;
+use function Mos\Functions\getRoundTitle;
 
 /**
  * Controller for a yatzy route an controller class.

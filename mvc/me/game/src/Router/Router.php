@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace Mos\Router;
 
-use Webprogramming\Dice\{
-    Game
-};
+use Webprogramming\Dice\Game;
 
-use function Mos\Functions\{
-    destroySession,
-    redirectTo,
-    renderView,
-    renderTwigView,
-    sendResponse,
-    url,
-    initSession
-};
+use function Mos\Functions\destroySession;
+use function Mos\Functions\redirectTo;
+use function Mos\Functions\renderView;
+use function Mos\Functions\renderTwigView;
+use function Mos\Functions\sendResponse;
+use function Mos\Functions\url;
+use function Mos\Functions\initSession;
 
 /**
  * Class Router.

@@ -6,15 +6,11 @@ namespace Mos\Controller;
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ResponseInterface;
-use Webprogramming\Dice\{
-    Game
-};
+use Webprogramming\Dice\Game;
 
-use function Mos\Functions\{
-    renderView,
-    initSessionGameSetting,
-    saveSettingSession
-};
+use function Mos\Functions\renderView;
+use function Mos\Functions\initSessionGameSetting;
+use function Mos\Functions\saveSettingSession;
 
 /**
  * Controller for a dice route an controller class.

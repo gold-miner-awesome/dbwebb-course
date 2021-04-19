@@ -6,10 +6,8 @@ namespace Webprogramming\Dice;
 
 use Webprogramming\Dice\DiceHand;
 
-use function Mos\Functions\{
-    renderView,
-    sendResponse
-};
+use function Mos\Functions\renderView;
+use function Mos\Functions\sendResponse;
 
 /**
  * Class Game.
@@ -63,7 +61,6 @@ class Game
         $data["menu_game21_class"] = "selected";
 
         $body = renderView("layout/dice.php", $data);
-        // sendResponse($body);
         return $body;
     }
 
@@ -108,7 +105,6 @@ class Game
         $data["menu_game21_class"] = "selected";
 
         $body = renderView("layout/result.php", $data);
-        // sendResponse($body);
         return $body;
     }
 

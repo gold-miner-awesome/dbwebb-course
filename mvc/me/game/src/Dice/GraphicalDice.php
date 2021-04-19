@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Webprogramming\Dice;
 
-use function Mos\Functions\{
-    url
-};
+use function Mos\Functions\url;
 
 /**
  * Class GraphicalDice.
